@@ -378,6 +378,8 @@ MonoBehaviour:
   laneLeft: {fileID: 371862384}
   laneMiddle: {fileID: 1827398759}
   laneRight: {fileID: 896727153}
+  rb: {fileID: 595163355}
+  jumpVelocity: 40
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
