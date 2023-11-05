@@ -6,6 +6,10 @@ public class PlayerHealth : MonoBehaviour
 {
     [SerializeField]
     private int health;
+    [HideInInspector]
+    public bool isDead;
+    [SerializeField]
+    LaneObjectsMovement objMovement;
 
     // Update is called once per frame
     void Update()
@@ -15,13 +19,22 @@ public class PlayerHealth : MonoBehaviour
 
     public void DecreaseHealth()
     {
-        if (health <= 0) GameOver();
+        if (health <= 0) { GameOver(); return; }
         health--;
     }
 
     public void GameOver()
     {
-        print("Dead lmao");
+        isDead = true;
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Obstacle" && !isDead)
+        {
+            DecreaseHealth();
+            objMovement.Reset();
+            other.gameObject.SetActive(false);
+        }
     }
 
 

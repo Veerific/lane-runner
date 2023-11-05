@@ -1,36 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &556454255002305041
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6257640137774992210}
-  m_Layer: 0
-  m_Name: Lane Objects
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6257640137774992210
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 556454255002305041}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.8281136, y: -1.1731443, z: -6.3236694}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4929200727592137585}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7693989808945250530
 GameObject:
   m_ObjectHideFlags: 0
@@ -64,7 +33,6 @@ Transform:
   - {fileID: 3386551476040650620}
   - {fileID: 4482726241463855138}
   - {fileID: 1285728074619631328}
-  - {fileID: 6257640137774992210}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1610002091303759285
@@ -159,7 +127,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2164931306667718790, guid: 52ec3065827c94b4793219e270eb15b3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 40
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 2164931306667718790, guid: 52ec3065827c94b4793219e270eb15b3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -226,7 +194,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1059736597481752829, guid: 41635c4054fe5bd4e9ef55d2a463805d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 40
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 1059736597481752829, guid: 41635c4054fe5bd4e9ef55d2a463805d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -297,7 +265,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7726242945368764969, guid: 441900eed03897447a9e090a8810c3ff, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 40
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7726242945368764969, guid: 441900eed03897447a9e090a8810c3ff, type: 3}
       propertyPath: m_LocalRotation.w

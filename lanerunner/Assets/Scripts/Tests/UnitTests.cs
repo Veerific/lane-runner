@@ -70,4 +70,25 @@ public class UnitTests
         Object.Destroy(sceneObjects);
     }
 
+    [UnityTest]
+    public IEnumerator PlayerHealth_GameOverCheck()
+    {
+        GameObject sceneObjects = Object.Instantiate(Resources.Load<GameObject>("Prefabs/SceneObjects"));
+
+        yield return new WaitUntil(() => sceneObjects != null);
+
+        GameObject player = sceneObjects.transform.Find("Player").gameObject;
+        PlayerHealth health = player.GetComponent<PlayerHealth>();
+
+        health.DecreaseHealth();
+        health.DecreaseHealth();
+        health.DecreaseHealth();
+        health.DecreaseHealth();
+
+        yield return null;
+
+        Assert.AreEqual(health.isDead, true);
+        Object.Destroy(sceneObjects);
+    }
+
 }
