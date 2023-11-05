@@ -7,6 +7,7 @@ public class LaneObjectsMovement : MonoBehaviour
 {
     [SerializeField]
     private Vector3 speed;
+    private bool gameOver = false;
 
 
 
@@ -15,13 +16,20 @@ public class LaneObjectsMovement : MonoBehaviour
     {
         speed.z = 0.001f;
     }
+    public void GameOver()
+    {
+        gameOver = true;
+
+    }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        transform.position -= speed;
-        speed.z += 0.0007f;
-    
+        if (!gameOver)
+        {
+            transform.position -= speed;
+            speed.z += 0.0007f;
+        }
     }
 
 }

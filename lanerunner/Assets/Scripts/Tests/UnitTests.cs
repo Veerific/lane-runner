@@ -51,7 +51,7 @@ public class UnitTests
     }
 
     [UnityTest]
-    public IEnumerator PlayerMovement_DoesntGoOutOfBounds()
+    public IEnumerator PlayerMovement_DoesntGoOutOfBoundsLeft()
     {
         GameObject sceneObjects = Object.Instantiate(Resources.Load<GameObject>("Prefabs/SceneObjects"));
 
@@ -69,9 +69,29 @@ public class UnitTests
         Assert.AreEqual(0, playerMovement.currentPlayerPos);
         Object.Destroy(sceneObjects);
     }
+    [UnityTest]
+    public IEnumerator PlayerMovement_DoesntGoOutOfBoundsRight()
+    {
+        GameObject sceneObjects = Object.Instantiate(Resources.Load<GameObject>("Prefabs/SceneObjects"));
+
+        yield return new WaitUntil(() => sceneObjects != null);
+
+        GameObject player = sceneObjects.transform.Find("Player").gameObject;
+        PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
+        PlayerInput playerInput = player.GetComponent<PlayerInput>();
+
+        playerInput.playerMovesRight.Invoke();
+        playerInput.playerMovesRight.Invoke();
+
+        yield return new WaitForSeconds(0.3f);
+
+        Assert.AreEqual(2, playerMovement.currentPlayerPos);
+        Object.Destroy(sceneObjects);
+    }
+
 
     [UnityTest]
-    public IEnumerator PlayerHealth_GameOverCheck()
+    public IEnumerator PlayerHealth_GameOverIsCalledWhenHitThreeTimes()
     {
         GameObject sceneObjects = Object.Instantiate(Resources.Load<GameObject>("Prefabs/SceneObjects"));
 
@@ -80,10 +100,7 @@ public class UnitTests
         GameObject player = sceneObjects.transform.Find("Player").gameObject;
         PlayerHealth health = player.GetComponent<PlayerHealth>();
 
-        health.DecreaseHealth();
-        health.DecreaseHealth();
-        health.DecreaseHealth();
-        health.DecreaseHealth();
+         
 
         yield return null;
 

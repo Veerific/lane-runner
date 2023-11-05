@@ -26,6 +26,7 @@ public class PlayerHealth : MonoBehaviour
     public void GameOver()
     {
         isDead = true;
+
     }
     private void OnTriggerEnter(Collider other)
     {
