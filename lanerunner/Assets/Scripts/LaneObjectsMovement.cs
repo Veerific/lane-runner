@@ -20,7 +20,7 @@ public class LaneObjectsMovement : MonoBehaviour
     void FixedUpdate()
     {
         transform.position -= speed;
-        speed.z += 0.0004f;
+        speed.z += 0.0007f;
     
     }
 
