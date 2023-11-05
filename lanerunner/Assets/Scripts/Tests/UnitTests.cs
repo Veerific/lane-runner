@@ -9,20 +9,65 @@ using UnityEngine.TestTools;
 public class UnitTests
 {
 
-
     // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
     // `yield return null;` to skip a frame.
     [UnityTest]
-    public IEnumerator PlayerMovemen_SwitchesLane()
+    public IEnumerator PlayerMovement_SwitchesToLeftLaneCorrectly()
     {
-        GameObject lane = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Lanes"));
-        GameObject player = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Player"));
-        Vector3 currentPos = player.transform.position;
+        GameObject sceneObjects = Object.Instantiate(Resources.Load<GameObject>("Prefabs/SceneObjects"));
+
+        yield return new WaitUntil(() => sceneObjects != null);
+
+        GameObject player = sceneObjects.transform.Find("Player").gameObject;
         PlayerInput playerInput = player.GetComponent<PlayerInput>();
+        GameObject leftLane = sceneObjects.transform.Find("Left").gameObject;
+        
 
         playerInput.playerMovesLeft.Invoke();
         yield return new WaitForSeconds(0.1f);
 
-        Assert.AreNotEqual(currentPos, player.transform.position);
+        Assert.AreEqual(leftLane.transform.position.x, player.transform.position.x);
+
+
+        Object.Destroy(sceneObjects);
     }
+
+    [UnityTest]
+    public IEnumerator PlayerMovement_SwitchesToRightLaneCorrectly()
+    {
+        GameObject sceneObjects = Object.Instantiate(Resources.Load<GameObject>("Prefabs/SceneObjects"));
+
+        yield return new WaitUntil(() => sceneObjects != null);
+        GameObject player = sceneObjects.transform.Find("Player").gameObject;
+        PlayerInput playerInput = player.GetComponent<PlayerInput>();
+        GameObject rightLane = sceneObjects.transform.Find("Right").gameObject;
+ 
+        playerInput.playerMovesRight.Invoke();
+        yield return new WaitForSeconds(0.1f);
+
+        Assert.AreEqual(rightLane.transform.position.x, player.transform.position.x);
+
+        Object.Destroy(sceneObjects);
+    }
+
+    [UnityTest]
+    public IEnumerator PlayerMovement_DoesntGoOutOfBounds()
+    {
+        GameObject sceneObjects = Object.Instantiate(Resources.Load<GameObject>("Prefabs/SceneObjects"));
+
+        yield return new WaitUntil(() => sceneObjects != null);
+
+        GameObject player = sceneObjects.transform.Find("Player").gameObject;
+        PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
+        PlayerInput playerInput = player.GetComponent<PlayerInput>();
+
+        playerInput.playerMovesLeft.Invoke();
+        playerInput.playerMovesLeft.Invoke();
+
+        yield return new WaitForSeconds(0.3f);
+
+        Assert.AreEqual(0, playerMovement.currentPlayerPos);
+        Object.Destroy(sceneObjects);
+    }
+
 }

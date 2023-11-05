@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField]
     private GameObject laneLeft, laneMiddle, laneRight;
-    private int currentPlayerPos;
+    [HideInInspector]
+    public int currentPlayerPos;   
     private bool isJumping;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private float jumpVelocity;
@@ -15,22 +17,15 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        FindLanes();
         currentPlayerPos = 1;
         playerInput.playerMovesLeft.AddListener(MoveLeft);
         playerInput.playerMovesRight.AddListener(MoveRight);
         playerInput.playerJumps.AddListener(Jump);
     }
     
-    void FindLanes()
-    {
-        laneLeft = GameObject.Find("Left");
-        laneMiddle = GameObject.Find("Middle");
-        laneRight = GameObject.Find("Right");
-    }
-
     private void FixedUpdate()
     {
+        
         switch(currentPlayerPos)
         {
             case 0:
@@ -50,14 +45,14 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void MoveLeft()
+    public void MoveLeft()
     {
         currentPlayerPos = currentPlayerPos > 0 ? currentPlayerPos -= 1 : 0;
     }
 
     private void MoveRight()
     {
-        currentPlayerPos = currentPlayerPos < 2 ? currentPlayerPos += 1 : 0;
+        currentPlayerPos = currentPlayerPos < 2 ? currentPlayerPos += 1 : 2;
     }
 
     private void Jump()
