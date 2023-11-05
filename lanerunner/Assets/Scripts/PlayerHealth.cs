@@ -9,7 +9,9 @@ public class PlayerHealth : MonoBehaviour
     [HideInInspector]
     public bool isDead;
     [SerializeField]
-    LaneObjectsMovement objMovement;
+    public LaneObjectsMovement objMovement;
+    [SerializeField]
+    ResetScene reset;
 
     // Update is called once per frame
     void Update()
@@ -19,22 +21,24 @@ public class PlayerHealth : MonoBehaviour
 
     public void DecreaseHealth()
     {
-        if (health <= 0) { GameOver(); return; }
+        
         health--;
+        if(health <= 0) { GameOver(); }
     }
 
     public void GameOver()
     {
         isDead = true;
-
+        objMovement.GameOver();
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Obstacle" && !isDead)
         {
+            other.gameObject.SetActive(false);
             DecreaseHealth();
             objMovement.Reset();
-            other.gameObject.SetActive(false);
+          
         }
     }
 

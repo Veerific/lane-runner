@@ -94,15 +94,27 @@ public class UnitTests
     public IEnumerator PlayerHealth_GameOverIsCalledWhenHitThreeTimes()
     {
         GameObject sceneObjects = Object.Instantiate(Resources.Load<GameObject>("Prefabs/SceneObjects"));
+        GameObject level = Object.Instantiate(Resources.Load<GameObject>("Prefabs/LevelPreset"));
 
         yield return new WaitUntil(() => sceneObjects != null);
 
         GameObject player = sceneObjects.transform.Find("Player").gameObject;
+        PlayerInput playerInput = player.GetComponent<PlayerInput>();
         PlayerHealth health = player.GetComponent<PlayerHealth>();
+        health.objMovement = level.gameObject.GetComponent<LaneObjectsMovement>();
 
-         
+        playerInput.playerMovesRight.Invoke();
 
-        yield return null;
+        yield return new WaitForSeconds(3f);
+
+        playerInput.playerMovesLeft.Invoke();
+        playerInput.playerMovesLeft.Invoke();
+
+        yield return new WaitForSeconds(3f);
+
+        playerInput.playerMovesRight.Invoke();
+
+        yield return new WaitForSeconds(3f); 
 
         Assert.IsTrue(health.isDead);
         Object.Destroy(sceneObjects);
