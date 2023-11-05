@@ -12,11 +12,11 @@ public class ResetScene : MonoBehaviour
     void Update()
     {
         if(willReset) timer -= Time.deltaTime;
+        if (timer <= 0) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void Reset()
     {
         willReset = true;
-        if(timer < 0) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

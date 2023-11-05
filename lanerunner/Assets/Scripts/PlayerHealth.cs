@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
@@ -12,11 +13,14 @@ public class PlayerHealth : MonoBehaviour
     public LaneObjectsMovement objMovement;
     [SerializeField]
     ResetScene reset;
+    [SerializeField]
+    private TextMeshProUGUI healthText;
 
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.H)) DecreaseHealth();
+        healthText.text = "Health: " + health.ToString();
     }
 
     public void DecreaseHealth()
@@ -30,6 +34,7 @@ public class PlayerHealth : MonoBehaviour
     {
         isDead = true;
         objMovement.GameOver();
+        reset.Reset();
     }
     private void OnTriggerEnter(Collider other)
     {
