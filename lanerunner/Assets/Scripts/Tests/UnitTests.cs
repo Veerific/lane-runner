@@ -87,7 +87,7 @@ public class UnitTests
 
         yield return null;
 
-        Assert.AreEqual(health.isDead, true);
+        Assert.IsTrue(health.isDead);
         Object.Destroy(sceneObjects);
     }
 
