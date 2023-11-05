@@ -8,7 +8,6 @@ public class PlayerInput : MonoBehaviour
 
     public UnityEvent playerMovesLeft, playerMovesRight, playerJumps;
     
-
     void Start()
     {
         if(playerMovesLeft == null) playerMovesLeft = new UnityEvent();
