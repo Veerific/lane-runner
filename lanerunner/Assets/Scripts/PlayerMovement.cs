@@ -10,10 +10,15 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Rigidbody rb;
     [SerializeField] private float jumpVelocity;
 
+    [SerializeField] private PlayerInput playerInput;
+
     // Start is called before the first frame update
     void Start()
     {
         currentPlayerPos = 1;
+        playerInput.playerMovesLeft.AddListener(MoveLeft);
+        playerInput.playerMovesRight.AddListener(MoveRight);
+        playerInput.playerJumps.AddListener(Jump);
     }
 
     private void FixedUpdate()
@@ -37,24 +42,20 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void MoveLeft()
     {
-        Movement();
+        currentPlayerPos = currentPlayerPos > 0 ? currentPlayerPos -= 1 : 0;
     }
 
-    void Movement()
+    private void MoveRight()
     {
-        if (Input.GetKeyDown(KeyCode.A)){
-          
-            currentPlayerPos = currentPlayerPos > 0 ? currentPlayerPos-=1: 0;
-        }
-
-        if (Input.GetKeyDown(KeyCode.D)){
-            
-            currentPlayerPos = currentPlayerPos < 2 ? currentPlayerPos+=1 : 2;
-        }
-        if(Input.GetKeyDown(KeyCode.W)) isJumping = true;
-        
+        currentPlayerPos = currentPlayerPos < 2 ? currentPlayerPos += 1 : 0;
     }
+
+    private void Jump()
+    {
+        isJumping = true;
+    }
+
+
 }
