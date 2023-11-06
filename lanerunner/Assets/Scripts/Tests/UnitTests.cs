@@ -147,6 +147,30 @@ public class UnitTests
         Object.Destroy(level);
     }
 
+    [UnityTest]
+    public IEnumerator PlayerScore_ScoreIncreasesWithItem()
+    {
+        GameObject sceneObjects = Object.Instantiate(Resources.Load<GameObject>("Prefabs/SceneObjects"));
+        GameObject level = Object.Instantiate(Resources.Load<GameObject>("Prefabs/LevelPreset"));
+
+        yield return new WaitUntil(() => sceneObjects != null);
+
+        GameObject player = sceneObjects.transform.Find("Player").gameObject;
+        PlayerInput playerInput = player.GetComponent<PlayerInput>();
+
+        yield return new WaitForSeconds(4f);
+      
+        playerInput.playerMovesLeft.Invoke();
+        int currentScore = player.GetComponent<PlayerScore>().score;
+
+        yield return new WaitForSeconds(1f);
+
+        int difference = player.GetComponent<PlayerScore>().score - currentScore;
+        Assert.IsTrue(difference > 1000);
+        Object.Destroy(sceneObjects);
+        Object.Destroy(level);
+    }
+
 
 
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerScore : MonoBehaviour
 {
-    public float score;
+    public int score;
     public int itemCount;
 
     private void Start()
