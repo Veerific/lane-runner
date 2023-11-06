@@ -158,7 +158,7 @@ public class UnitTests
         GameObject player = sceneObjects.transform.Find("Player").gameObject;
         PlayerInput playerInput = player.GetComponent<PlayerInput>();
 
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(4.5f);
       
         playerInput.playerMovesLeft.Invoke();
         int currentScore = player.GetComponent<PlayerScore>().score;
