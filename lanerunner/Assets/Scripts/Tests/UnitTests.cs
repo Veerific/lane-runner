@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
+
 
 public class UnitTests
 {
@@ -95,6 +97,7 @@ public class UnitTests
     {
         GameObject sceneObjects = Object.Instantiate(Resources.Load<GameObject>("Prefabs/SceneObjects"));
         GameObject level = Object.Instantiate(Resources.Load<GameObject>("Prefabs/LevelPreset"));
+        
 
         yield return new WaitUntil(() => sceneObjects != null);
 
@@ -118,6 +121,32 @@ public class UnitTests
 
         Assert.IsTrue(health.isDead);
         Object.Destroy(sceneObjects);
+        Object.Destroy(level);
     }
+
+    [UnityTest]
+    public IEnumerator PlayerHealth_HealthDecreasesWhenHit()
+    {
+        GameObject sceneObjects = Object.Instantiate(Resources.Load<GameObject>("Prefabs/SceneObjects"));
+        GameObject level = Object.Instantiate(Resources.Load<GameObject>("Prefabs/LevelPreset"));
+
+        yield return new WaitUntil(() => sceneObjects != null);
+
+        GameObject player = sceneObjects.transform.Find("Player").gameObject;
+        PlayerInput playerInput = player.GetComponent<PlayerInput>();
+        PlayerHealth health = player.GetComponent<PlayerHealth>();
+        health.objMovement = level.gameObject.GetComponent<LaneObjectsMovement>();
+        int observedHealth = health.health;
+
+        playerInput.playerMovesRight.Invoke();
+
+        yield return new WaitForSeconds(3f);
+
+        Assert.AreNotEqual(observedHealth, health.health);
+        Object.Destroy(sceneObjects);
+        Object.Destroy(level);
+    }
+
+
 
 }

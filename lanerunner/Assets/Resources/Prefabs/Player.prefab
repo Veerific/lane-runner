@@ -189,9 +189,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d11d6b8b114a35445b7e369585626dba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
+  health: 3
   isDead: 0
   objMovement: {fileID: 0}
+  reset: {fileID: 0}
+  healthText: {fileID: 0}
 --- !u!114 &5449897193511595788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,3 +206,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c6ffc918e649b41851422fb22be690, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreText: {fileID: 0}
+  itemText: {fileID: 0}
